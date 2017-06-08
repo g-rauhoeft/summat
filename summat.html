@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Summat</title>
+  <meta name="description" content="Test site for summat.js">
+  <meta name="author" content="Greg Rauhoeft">
+
+  <link rel="stylesheet" href="summat.css?v=1.0">
+</head>
+
+<body>
+  <main>
+    <span>nernerner</span>
+    <div class="grid">
+      <div class="grid-item" data-colspan="4" data-rowspan="2"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item" data-colspan="2" data-rowspan="4"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item" data-colspan="2"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item" data-colspan="2"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+    </div>
+  </main>
+  <script src="summat.js"></script>
+  <script type="text/javascript">
+    var something = new summat();
+    console.debug(something);
+    something.init({
+      element: document.getElementsByClassName("grid")[0],
+      childSelector: "grid-item",
+      columns: 6,
+      margin: 5,
+    });
+    document.onclick = function(){
+      var element = document.getElementsByClassName("grid-item")[Math.floor(Math.random()*10)]
+      element.dataset.colspan = Math.floor(Math.random()*4);
+      element.dataset.rowspan = Math.floor(Math.random()*4);
+      something.layout();
+    };
+  </script>
+</body>
+</html>
